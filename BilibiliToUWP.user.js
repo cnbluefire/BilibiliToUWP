@@ -7,9 +7,9 @@
 // @include     http://music.163.com/*
 // @run-at      document-start
 // @name        BilibiliToUWP
-// @name:zh-CN  Bilibiliµ÷ÆğUWP¿Í»§¶Ë
-// @description BilibiliToUWP
-// @description:zh-CN Bilibiliµ÷ÆğUWP¿Í»§¶Ë
+// @name:zh-CN  Bilibiliè°ƒèµ·UWPå®¢æˆ·ç«¯
+// @description åœ¨å“”å“©å“”å“©å’Œç½‘æ˜“äº‘éŸ³ä¹ç½‘é¡µæ·»åŠ ä½¿ç”¨å®¢æˆ·ç«¯æ‰“å¼€çš„æŒ‰é’®ã€‚
+// @description:zh-CN Bilibiliè°ƒèµ·UWPå®¢æˆ·ç«¯
 // ==/UserScript==
 
 unsafeWindow.Object.freeze = null;
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
             var ele = document.getElementsByClassName("tminfo");
             var ele2 = document.getElementsByClassName("qr-bottom");
             var openpara = document.createElement("a");
-            openpara.innerText = "ÓÃ¿Í»§¶Ë´ò¿ª";
+            openpara.innerText = "ï¿½Ã¿Í»ï¿½ï¿½Ë´ï¿½ï¿½ï¿½";
             openpara.setAttribute("class", "charge-appeal-init");
             ele2[0].childNodes[1].href = URI;
             ele2[0].childNodes[1].removeAttribute("target");
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
             ele[0].appendChild(openpara);
         }
         if (url.indexOf("music.163.") != -1) {
-            if (url.indexOf("playlist?id=") != -1)   //ÅĞ¶Ï¸èµ¥
+            if (url.indexOf("playlist?id=") != -1)   //ï¿½Ğ¶Ï¸èµ¥
             {
                 loc = url.match("id=[0-9]*")[0].match("[1-9].*")[0];
             }
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
             //window.location.href = "orpheus://playlist/" + loc;
             URI = "orpheus://playlist/" + loc;
         }
-        if (url.indexOf("song") != -1)      //ÅĞ¶Ï¸èÇú
+        if (url.indexOf("song") != -1)      //ï¿½Ğ¶Ï¸ï¿½ï¿½ï¿½
         {
             if (url.indexOf("song?id=") != -1) {
                 loc = url.match("id=[0-9]*")[0].match("[1-9].*")[0];
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
             }
             URI = "orpheus://song/" + loc;
         }
-        if (url.indexOf("album") != -1)     //ÅĞ¶Ï×¨¼­
+        if (url.indexOf("album") != -1)     //ï¿½Ğ¶ï¿½×¨ï¿½ï¿½
         {
             if (url.indexOf("album?id=") != -1) {
                 loc = url.match("id=[0-9]*")[0].match("[1-9].*")[0];
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
             }
             URI = "orpheus://album/" + loc;
         }
-        if (url.indexOf("program?id=") != -1)   //ÅĞ¶ÏµçÌ¨½ÚÄ¿
+        if (url.indexOf("program?id=") != -1)   //ï¿½Ğ¶Ïµï¿½Ì¨ï¿½ï¿½Ä¿
         {
             if (url.indexOf("program?id=") != -1) {
                 loc = url.match("id=[0-9]*")[0].match("[1-9].*")[0];
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
             }
             URI = "orpheus://program/" + loc;
         }
-        if (url.indexOf("artist?id=") != -1)    //ÅĞ¶Ï¸èÊÖ
+        if (url.indexOf("artist?id=") != -1)    //ï¿½Ğ¶Ï¸ï¿½ï¿½ï¿½
         {
             if (url.indexOf("artist?id=") != -1) {
                 loc = url.match("id=[0-9]*")[0].match("[1-9].*")[0];
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
             }
             URI = "orpheus://artist/" + loc;
         }
-        if (url.indexOf("djradio?id=") != -1)   //ÅĞ¶ÏµçÌ¨Ö÷²¥
+        if (url.indexOf("djradio?id=") != -1)   //ï¿½Ğ¶Ïµï¿½Ì¨ï¿½ï¿½ï¿½ï¿½
         {
             if (url.indexOf("djradio?id=") != -1) {
                 loc = url.match("id=[0-9]*")[0].match("[1-9].*")[0];
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
         document.documentElement.focus();
         var para = document.createElement("a");
         var childpara = document.createElement("i");
-        var node = document.createTextNode("ÓÃ¿Í»§¶Ë´ò¿ª");
+        var node = document.createTextNode("ï¿½Ã¿Í»ï¿½ï¿½Ë´ï¿½ï¿½ï¿½");
         childpara.appendChild(node);
         para.setAttribute("class", "u-btni u-btni-dl");
         para.href = URI;
