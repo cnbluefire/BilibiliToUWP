@@ -1,0 +1,2 @@
+# BilibiliToUWP
+使用脚本之前请先安装UWP版本的Bilibili和网易云音乐客户端。
