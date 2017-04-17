@@ -1,9 +1,10 @@
 // ==UserScript==
 // @namespace   BlueFire
-// @version     1.02
+// @version     1.03
 // @grant       unsafeWindow
 // @include     http://www.bilibili.com/video/*
 // @include     http://www.bilibili.com/mobile/video/*
+// @include     http://live.bilibili.com/*
 // @include     http://music.163.com/*
 // @run-at      document-start
 // @name        BilibiliToUWP
@@ -23,18 +24,35 @@ document.addEventListener('DOMContentLoaded', function (event) {
     var element,element2;
     if(url.indexOf("bilibili.") != -1 && url.indexOf("html") == -1)
     {
-        loc = url.match("av[0-9]*")[0].match("[0-9].*");
-        URI = "bilibili://video/" + loc;
-        var ele = document.getElementsByClassName("tminfo");
-        var ele2 = document.getElementsByClassName("qr-bottom");
-        element = document.createElement("a");
-        element.innerText = "用客户端打开";
-        element.setAttribute("class","charge-appeal-init");
-        ele2[0].childNodes[1].href = URI;
-        ele2[0].childNodes[1].removeAttribute("target");
-        //ele[2].childNodes[1].innerText = URI;
-        element.href=URI;
-        ele[0].appendChild(element);
+		if(url.indexOf("video") != -1)
+		{
+			loc = url.match("av[0-9]*")[0].match("[0-9].*");
+			URI = "bilibili://video/" + loc;
+			var ele = document.getElementsByClassName("tminfo");
+			var ele2 = document.getElementsByClassName("qr-bottom");
+			element = document.createElement("a");
+			element.innerText = "用客户端打开";
+			element.setAttribute("class","charge-appeal-init");
+			ele2[0].childNodes[1].href = URI;
+			ele2[0].childNodes[1].removeAttribute("target");
+			//ele[2].childNodes[1].innerText = URI;
+			element.href=URI;
+			ele[0].appendChild(element);
+		}
+		if(url.indexOf("live") != -1)
+		{
+			loc = url.match("[0-9].*")[0];
+			URI = "bilibili://live/" + loc;
+			var ele = document.getElementsByClassName("room-title-row");
+			var ele2 = document.getElementsByClassName("report-link dp-none")[0];
+			element = document.createElement("a");
+			element.innerText = "用客户端打开";
+			element.setAttribute("class","share-link");
+			element.href=URI;
+			ele[0].appendChild(ele2);
+			ele[0].appendChild(element);
+		}
+
     }
     if(url.indexOf("music.163.") != -1)
     {
