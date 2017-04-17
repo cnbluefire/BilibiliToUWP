@@ -1,6 +1,6 @@
 // ==UserScript==
 // @namespace   BlueFire
-// @version     1
+// @version     1.01
 // @grant       unsafeWindow
 // @include     http://www.bilibili.com/video/*
 // @include     http://www.bilibili.com/mobile/video/*
@@ -9,7 +9,7 @@
 // @name        BilibiliToUWP
 // @name:zh-CN  Bilibili调起UWP客户端
 // @description BilibiliToUWP
-// @description:zh-CN Bilibili调起UWP客户端
+// @description:zh-CN 从Bilibili网页调起UWP客户端
 // ==/UserScript==
 
 unsafeWindow.Object.freeze = null;
