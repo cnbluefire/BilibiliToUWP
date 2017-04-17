@@ -1,6 +1,6 @@
 // ==UserScript==
 // @namespace   BlueFire
-// @version     1.01
+// @version     1.02
 // @grant       unsafeWindow
 // @include     http://www.bilibili.com/video/*
 // @include     http://www.bilibili.com/mobile/video/*
@@ -13,7 +13,7 @@
 // ==/UserScript==
 
 unsafeWindow.Object.freeze = null;
-var IsOpenURIWhenPageLoadedEnable = true;
+var IsOpenURIWhenPageLoadedEnable = false;
 document.addEventListener('DOMContentLoaded', function (event) {
   try {
     window.oneerror=function(){return true;};
