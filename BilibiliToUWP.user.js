@@ -8,7 +8,7 @@
 // @run-at      document-start
 // @name        BilibiliToUWP
 // @name:zh-CN  Bilibili调起UWP客户端
-// @description BilibiliToUWP
+// @description Open BilibiliUWP from Web
 // @description:zh-CN 从Bilibili网页调起UWP客户端
 // ==/UserScript==
 
