@@ -6,6 +6,8 @@
 // @include     http://www.bilibili.com/mobile/video/*
 // @include     http://live.bilibili.com/*
 // @include     http://music.163.com/*
+// @include     http://*.ithome.com/*
+// @include     http://*.lapin365.com/*
 // @run-at      document-start
 // @name        BilibiliToUWP
 // @name:zh-CN  Bilibili调起UWP客户端
@@ -21,36 +23,39 @@ document.addEventListener('DOMContentLoaded', function (event) {
     var url = window.location.href;
     var loc;
     var URI="";
-    var element,element2;
+    var element,element2,para,childpara,node;
     if(url.indexOf("bilibili.") != -1 && url.indexOf("html") == -1)
     {
 		if(url.indexOf("video") != -1)
 		{
 			loc = url.match("av[0-9]*")[0].match("[0-9].*");
 			URI = "bilibili://video/" + loc;
-			var ele = document.getElementsByClassName("tminfo");
-			var ele2 = document.getElementsByClassName("qr-bottom");
-			element = document.createElement("a");
-			element.innerText = "用客户端打开";
-			element.setAttribute("class","charge-appeal-init");
-			ele2[0].childNodes[1].href = URI;
-			ele2[0].childNodes[1].removeAttribute("target");
-			//ele[2].childNodes[1].innerText = URI;
-			element.href=URI;
-			ele[0].appendChild(element);
+			element = document.getElementsByClassName("tminfo")[0];
+			para = document.createElement("a");
+			para.innerText = "用客户端打开";
+			para.setAttribute("class","charge-appeal-init");
+			para.href = URI;
+            element.appendChild(para);
+
+            element2 = document.getElementsByClassName("qr-bottom")[0];
+			element2.childNodes[1].removeAttribute("target");
+			element2.childNodes[1].href=URI;
 		}
-		if(url.indexOf("live") != -1)
+		else if(url.indexOf("live") != -1)
 		{
 			loc = url.match("[0-9].*")[0];
 			URI = "bilibili://live/" + loc;
-			var ele = document.getElementsByClassName("room-title-row");
-			var ele2 = document.getElementsByClassName("report-link dp-none")[0];
-			element = document.createElement("a");
-			element.innerText = "用客户端打开";
-			element.setAttribute("class","share-link");
-			element.href=URI;
-			ele[0].appendChild(ele2);
-			ele[0].appendChild(element);
+			element = document.getElementsByClassName("room-title-row")[0];
+			element2 = document.getElementsByClassName("report-link dp-none")[0];
+			para = document.createElement("a");
+			para.innerText = "用客户端打开";
+			para.setAttribute("class","share-link");
+			para.href=URI;
+            try
+            {
+                element.appendChild(element2);
+                element2.appendChild(para);
+            }catch(error){}
 		}
 
     }
@@ -139,9 +144,9 @@ document.addEventListener('DOMContentLoaded', function (event) {
 		if(IsEnable)
 		{
 			document.documentElement.focus();
-			var para = document.createElement("a");
-			var childpara = document.createElement("i");
-			var node=document.createTextNode("用客户端打开");
+			para = document.createElement("a");
+			childpara = document.createElement("i");
+			node=document.createTextNode("用客户端打开");
 			childpara.appendChild(node);
 			para.setAttribute("class","u-btni u-btni-dl");
 			para.href=URI;
@@ -154,6 +159,28 @@ document.addEventListener('DOMContentLoaded', function (event) {
 		}
 
 	}
+    if(url.indexOf("ithome.com") != -1)
+    {
+        if(url.indexOf("quan") == -1)
+        {
+            loc = url.match("[0-9]+")[0];
+            URI = "ithome://ithome.com/?newsid=" + loc;
+        }
+        else
+        {
+            loc = url.match("[0-9]{3}/[0-9]{3}")[0].replace("/","");
+            URI = "ithome://ithome.com/?postid=" + loc;
+        }
+        para = document.createElement("li");
+        childpara = document.createElement("a");
+        childpara.setAttribute("class","nav-item nav-item-7");
+        childpara.href = URI;
+        node = document.createTextNode("使用客户端打开");
+        childpara.appendChild(node);
+        para.appendChild(childpara);
+        element = document.getElementsByClassName("nav_list")[0];
+        try {element.appendChild(para);} catch (error) {}
+    }
     if(URI !== "" && URI !== null && URI !== undefined && IsOpenURIWhenPageLoadedEnable)
     {
 		alert(URI);
@@ -163,6 +190,6 @@ document.addEventListener('DOMContentLoaded', function (event) {
   }
     catch (error)
     {
-        alert(error);
+        //alert(error);
     }
 }, true);
