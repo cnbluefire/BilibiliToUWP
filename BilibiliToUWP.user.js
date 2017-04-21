@@ -1,9 +1,10 @@
 // ==UserScript==
 // @namespace   BlueFire
-// @version     1.03
+// @version     1.05
 // @grant       unsafeWindow
 // @include     http://www.bilibili.com/video/*
 // @include     http://www.bilibili.com/mobile/video/*
+// @include     http://bangumi.bilibili.com/*
 // @include     http://live.bilibili.com/*
 // @include     http://music.163.com/*
 // @include     http://*.ithome.com/*
@@ -17,16 +18,22 @@
 
 unsafeWindow.Object.freeze = null;
 var IsOpenURIWhenPageLoadedEnable = false;
-document.addEventListener('DOMContentLoaded', function (event) {
+document.addEventListener('DOMContentLoaded',OnPageLoaded , true);
+//document.onload = OnPageLoaded;
+function OnPageLoaded (event) {
   try {
     window.oneerror=function(){return true;};
     var url = window.location.href;
     var loc;
     var URI="";
     var element,element2,para,childpara,node;
-    if(url.indexOf("bilibili.") != -1 && url.indexOf("html") == -1)
+    if(url.indexOf("bilibili.") != -1 && (url.indexOf("index") != -1 || url.indexOf("html") == -1))
     {
-		if(url.indexOf("video") != -1)
+        if(url.indexOf("bangumi") != -1)
+        {
+            window.addEventListener('load',OnWindowLoaded,true);
+        }
+		else if(url.indexOf("video") != -1)
 		{
 			loc = url.match("av[0-9]*")[0].match("[0-9].*");
 			URI = "bilibili://video/" + loc;
@@ -192,4 +199,28 @@ document.addEventListener('DOMContentLoaded', function (event) {
     {
         //alert(error);
     }
-}, true);
+}
+
+function OnWindowLoaded(event)
+{
+    try 
+    {
+        window.oneerror=function(){return true;};
+        var url = window.location.href;
+        var loc;
+        var URI="";
+        if(url.indexOf("bilibili.") != -1 && (url.indexOf("index") != -1 || url.indexOf("html") == -1))
+        {
+            if(url.indexOf("bangumi") != -1)
+            {
+                var ele= document.getElementsByClassName("v-av-link")[0];
+                loc = ele.href.match("[0-9]+")[0];
+                URI = "bilibili://video/" + loc;
+                ele.setAttribute("target","");
+                ele.href = URI;
+                ele.innerText = "使用客户端打开 AV" + loc;
+            }
+        }
+    }
+    catch(error){}
+}
