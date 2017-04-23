@@ -1,6 +1,6 @@
 // ==UserScript==
 // @namespace   BlueFire
-// @version     1.05
+// @version     1.06
 // @grant       unsafeWindow
 // @include     http://www.bilibili.com/video/*
 // @include     http://www.bilibili.com/mobile/video/*
@@ -170,7 +170,7 @@ function OnPageLoaded (event) {
     {
         if(url.indexOf("quan") == -1)
         {
-            loc = url.match("[0-9]+")[0];
+            loc = url.match("/[0-9]+")[0].match("[0-9]+")[0];
             URI = "ithome://ithome.com/?newsid=" + loc;
         }
         else
